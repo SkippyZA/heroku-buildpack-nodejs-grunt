@@ -147,7 +147,7 @@ mkdir -p $build_dir/.profile.d
 echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$GEM_HOME/bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
 
 # Check and run Grunt
-(
+# (
   if [ -f $build_dir/grunt.js ] || [ -f $build_dir/Gruntfile.js ] || [ -f $build_dir/Gruntfile.coffee ]; then
     # get the env vars
     if [ -d "$env_dir" ]; then
@@ -163,4 +163,4 @@ echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\
   else
     echo "-----> No Gruntfile (grunt.js, Gruntfile.js, Gruntfile.coffee) found"
   fi
-)
+# )
