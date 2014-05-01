@@ -120,6 +120,12 @@ status "Cleaning up node-gyp and npm artifacts"
 rm -rf "$build_dir/.node-gyp"
 rm -rf "$build_dir/.npm"
 
+# Sass stuff
+echo "-----> Installing Bourbon/Sass"
+export GEM_HOME=$BUILD_DIR/.gem/ruby/1.9.1
+PATH="$GEM_HOME/bin:$PATH"
+HOME=$BUILD_DIR gem install bourbon sass --no-rdoc --no-ri
+
 # If Procfile is absent, try to create one using `npm start`
 if [ ! -e $build_dir/Procfile ]; then
   npm_start=$(cat $build_dir/package.json | $bp_dir/vendor/jq -r .scripts.start)
@@ -138,13 +144,7 @@ fi
 # Update the PATH
 status "Building runtime environment"
 mkdir -p $build_dir/.profile.d
-echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
-
-# Sass stuff
-echo "-----> Installing Bourbon/Sass"
-export GEM_HOME=$BUILD_DIR/.gem/ruby/1.9.1
-PATH="$GEM_HOME/bin:$PATH"
-HOME=$BUILD_DIR gem install bourbon sass --no-rdoc --no-ri
+echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$GEM_HOME/bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
 
 # Check and run Grunt
 (
