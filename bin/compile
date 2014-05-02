@@ -125,6 +125,7 @@ echo "-----> Installing Bourbon/Sass"
 export GEM_HOME=$BUILD_DIR/.gem/ruby/1.9.1
 PATH="$GEM_HOME/bin:$PATH"
 $BUILD_DIR gem install bourbon sass --no-rdoc --no-ri
+ln -s $GEM_HOM/bin/sass /usr/local/bin/sass
 
 # If Procfile is absent, try to create one using `npm start`
 if [ ! -e $build_dir/Procfile ]; then
